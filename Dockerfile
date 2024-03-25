@@ -9,7 +9,8 @@ RUN apt-get update \
   wget \
   git \
   sudo \
-  tar
+  tar \
+  ripgrep
 
 ARG USERNAME=ros
 ARG USER_UID=1000
@@ -58,3 +59,7 @@ RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/p
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 ENTRYPOINT [ "zsh" ]
+
+USER root
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+COPY ./.tmux.conf /home/ros/.tmux.conf

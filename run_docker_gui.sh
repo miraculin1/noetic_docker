@@ -18,6 +18,8 @@ docker run -it \
   --env="QT_X11_NO_MITSHM=1" \
   --env="NVIDIA_DRIVER_CAPABILITIERS=all" \
   --env="NVIDIA_VISABLE_DEVICES=all" \
+  --device /dev:/dev \
+  --privileged \
   -v ~/project/tb3_ws:/home/ros/tb3_ws \
   --ulimit nofile=1024:524288 \
   ros_noetic:latest
