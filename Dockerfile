@@ -63,3 +63,8 @@ ENTRYPOINT [ "zsh" ]
 USER root
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 COPY ./.tmux.conf /home/ros/.tmux.conf
+RUN apt-get update \
+  && apt-get install -y \
+  libsdl-image1.2-dev \
+  libsdl-dev \
+  && rm -rf /var/lib/apt/lists/*
