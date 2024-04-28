@@ -5,10 +5,11 @@
 # modify /etc/nvidia-container-runtime/config.toml line with "user"
 # to grant permmision
 # in docker file, set the max file descibe count with ulimit
+# --rm \
 
 docker run -it \
   --gpus all \
-  --name ros \
+  --name config \
   --user ros \
   --device=/dev/dri:/dev/dri \
   --network=host --ipc=host \
