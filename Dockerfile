@@ -34,31 +34,21 @@ RUN cd && cd .config\
   && git clone https://github.com/miraculin1/nvim_config.git \
   && mv nvim_config nvim \
   && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
-  && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 USER root
 RUN apt-get update \
   && apt-get install -y \
-  zsh \
-  zsh-autosuggestions \
-  zsh-syntax-highlighting \
   tmux \
   unzip \
   ranger \
   software-properties-common \
+  tar \
   && rm -rf /var/lib/apt/lists/*
-
-USER root
-COPY ./.zshrc /home/ros/.zshrc
-
-COPY .p10k.zsh /home/ros/.p10k.zsh
 
 USER ros
 RUN sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-ENTRYPOINT [ "zsh" ]
 
 USER root
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -68,3 +58,5 @@ RUN apt-get update \
   libsdl-image1.2-dev \
   libsdl-dev \
   && rm -rf /var/lib/apt/lists/*
+
+COPY .bashrc /home/ros

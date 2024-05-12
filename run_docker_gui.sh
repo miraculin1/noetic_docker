@@ -9,7 +9,7 @@
 
 docker run -it \
   --gpus all \
-  --name config \
+  --name racer \
   --user ros \
   --device=/dev/dri:/dev/dri \
   --network=host --ipc=host \
@@ -20,6 +20,7 @@ docker run -it \
   --env="NVIDIA_VISABLE_DEVICES=all" \
   --device /dev:/dev \
   --privileged \
-  -v ./mnt:/home/ros/mnt \
+  -v /home/miraculin/project/myROS/mnt:/home/ros/mnt \
   --ulimit nofile=1024:524288 \
-  noetic_dev:1.0
+  -e "TERM=xterm-256color" \
+  noetic_dev:latest
